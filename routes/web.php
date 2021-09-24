@@ -5,7 +5,7 @@ use App\Models\User;
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
-
+use App\Http\Controllers\GalleryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,9 +34,17 @@ Route::post('brand/store',[BrandController::class,'Store']);
 Route::get('brand/edit/{id}',[BrandController::class,'Edit']);
 Route::post('brand/update',[BrandController::class,'Update'])->name('update.brand');
 Route::get('brand/delete/{id}',[BrandController::class,'Delete']);
+Route::get('gallery',[GalleryController::class,'Show'])->name('show.gallery');
+Route::post('gallery/store',[GalleryController::class,'Store']);
+
+//email verification default route from documentation
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
     $users = User::all();
     return view('dashboard',['users'=>$users]);
 })->name('dashboard');

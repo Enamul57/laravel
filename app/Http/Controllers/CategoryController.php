@@ -7,6 +7,14 @@ use App\Models\Category;
 use Auth;
 class CategoryController extends Controller
 {
+        //verify
+        public function __construct(){
+            $this->middleware('auth');
+         }
+    
+         
+
+         
     //View Category Page
     public function index(){
         return view('admin/category/category');

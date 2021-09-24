@@ -8,7 +8,12 @@ use Image;
 // use Intervention\Image\ImageManagerStatic;
 class BrandController extends Controller
 {
+    //verify
+    public function __construct(){
+        $this->middleware('auth');
+     }
 
+     
     //Show
     public function Show(){
         $brand = Brand::latest()->paginate(7);
@@ -33,12 +38,7 @@ class BrandController extends Controller
         $image->resize(300,200)->save('image/brand/'.$name_gen);
         $storingToDatabase = 'image/brand/'.$name_gen;
 
-            // $uniqueName = hexdec(uniqid());
-            // $getExt = $brand_image->getClientOriginalExtension();
-            // $fullImgName = $uniqueName.".".$getExt;
-            // $path = "image/brand/";
-            // $brand_image->move($path,$fullImgName);
-            // $storingToDatabase = $path.$fullImgName;
+            
 
             $brand = new Brand();
             $brand->brand_name = $req->brand_name;
@@ -49,7 +49,12 @@ class BrandController extends Controller
 
         
     }
-
+// $uniqueName = hexdec(uniqid());
+            // $getExt = $brand_image->getClientOriginalExtension();
+            // $fullImgName = $uniqueName.".".$getExt;
+            // $path = "image/brand/";
+            // $brand_image->move($path,$fullImgName);
+            // $storingToDatabase = $path.$fullImgName;
     //Brand Edit
     public function Edit($id){
         $brand = Brand::find($id);
