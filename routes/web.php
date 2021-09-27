@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ use App\Http\Controllers\GalleryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 Route::get('category/all',[CategoryController::class,'index'])->name('all.category');
 Route::post('category/store',[CategoryController::class,'AddCat'])->name('store.category');
@@ -36,6 +37,19 @@ Route::post('brand/update',[BrandController::class,'Update'])->name('update.bran
 Route::get('brand/delete/{id}',[BrandController::class,'Delete']);
 Route::get('gallery',[GalleryController::class,'Show'])->name('show.gallery');
 Route::post('gallery/store',[GalleryController::class,'Store']);
+Route::get('logout',[AdminController::class,'logout']);
+
+
+
+
+
+
+
+
+
+
+
+
 
 //email verification default route from documentation
 Route::get('/email/verify', function () {
@@ -44,9 +58,9 @@ Route::get('/email/verify', function () {
 
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/home', function () {
+Route::middleware(['auth:sanctum', 'verified'])->get('/admin', function () {
     $users = User::all();
-    return view('dashboard',['users'=>$users]);
+    return view('admin.index',['users'=>$users]);
 })->name('dashboard');
 
 
