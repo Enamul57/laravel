@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-
+use App\Models\Brand;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SliderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,8 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    $brand = Brand::get();
+    return view('index',['brands'=>$brand]);
 });
 Route::get('category/all',[CategoryController::class,'index'])->name('all.category');
 Route::post('category/store',[CategoryController::class,'AddCat'])->name('store.category');
@@ -38,10 +40,12 @@ Route::get('brand/delete/{id}',[BrandController::class,'Delete']);
 Route::get('gallery',[GalleryController::class,'Show'])->name('show.gallery');
 Route::post('gallery/store',[GalleryController::class,'Store']);
 Route::get('logout',[AdminController::class,'logout']);
-
-
-
-
+Route::get('admin/slider',[SliderController::class,'show'])->name('slider.show');
+Route::get('admin/slider/add',[SliderController::class,'add'])->name('slider.add');
+Route::post('admin/slider/store',[SliderController::class,'store'])->name('slider.store');
+Route::get('admin/slider/edit/{id}',[SliderController::class,'edit']);
+Route::get('admin/slider/delete/{id}',[SliderController::class,'delete']);
+Route::post('admin/slider/update',[SliderController::class,'update']);
 
 
 

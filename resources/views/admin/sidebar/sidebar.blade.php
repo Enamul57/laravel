@@ -38,34 +38,36 @@
                     <ul  class="collapse show"  id="dashboard"
                       data-parent="#sidebar-menu">
                       <div class="sub-menu">
-                        
-                        
-                          
                             <li  class="active" >
-                              <a class="sidenav-item-link" href="index.html">
-                                <span class="nav-text">Ecommerce</span>
-                                
+                              <a class="sidenav-item-link" href="{{route('slider.show')}}">
+                                <span class="nav-text">Slider</span>
                               </a>
                             </li>
-                          
-                        
-
-                        
-                        
-                          
-                            <li >
-                              <a class="sidenav-item-link" href="analytics.html">
-                                <span class="nav-text">Analytics</span>
-                                
-                                <span class="badge badge-success">new</span>
-                                
-                              </a>
-                            </li>
-                          
-                        
-
-                        
                       </div>
+                      <div class="sub-menu">
+                            <li  class="active" >
+                              <a class="sidenav-item-link" href="">
+                                <span class="nav-text">Home About</span>
+                              </a>
+                            </li>
+                      </div>
+
+                      <div class="sub-menu">
+                            <li  class="active" >
+                              <a class="sidenav-item-link" href="">
+                                <span class="nav-text">Home Portfolio</span>
+                              </a>
+                            </li>
+                      </div>
+
+                      <div class="sub-menu">
+                            <li  class="active" >
+                              <a class="sidenav-item-link" href="{{route('show.brand')}}">
+                                <span class="nav-text">Brand</span>
+                              </a>
+                            </li>
+                      </div>
+
                     </ul>
                   </li>
                 
