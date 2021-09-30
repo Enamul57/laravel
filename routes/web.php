@@ -8,6 +8,8 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\AboutController;
+use App\Models\About;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +23,8 @@ use App\Http\Controllers\SliderController;
 
 Route::get('/', function () {
     $brand = Brand::get();
-    return view('index',['brands'=>$brand]);
+    $about = About::get();
+    return view('index',['brands'=>$brand,'abouts'=>$about]);
 });
 Route::get('category/all',[CategoryController::class,'index'])->name('all.category');
 Route::post('category/store',[CategoryController::class,'AddCat'])->name('store.category');
@@ -46,10 +49,12 @@ Route::post('admin/slider/store',[SliderController::class,'store'])->name('slide
 Route::get('admin/slider/edit/{id}',[SliderController::class,'edit']);
 Route::get('admin/slider/delete/{id}',[SliderController::class,'delete']);
 Route::post('admin/slider/update',[SliderController::class,'update']);
-
-
-
-
+Route::get('admin/home/about',[AboutController::class,'index'])->name('home.about');
+Route::get('admin/about/add',[AboutController::class,'Add']);
+Route::post('admin/about/store',[AboutController::class,'Store']);
+Route::get('about/edit/{id}',[AboutController::class,'edit']);
+Route::get('about/delete/{id}',[AboutController::class,'delete']);
+Route::post('about/update',[AboutController::class,'update']);
 
 
 

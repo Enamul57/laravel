@@ -24,6 +24,12 @@ class SliderController extends Controller
     }
 
     public function store(Request $req){
+        $validation = $req->validate([
+            'title' => 'required',
+            'description'=>'required',
+            'image'=>'required|mimes:jpg,png,jpeg'
+        ]);
+
         $slider = new Slider;
         $slider->title = $req->title;
         $slider->description = $req->description;
@@ -45,6 +51,10 @@ class SliderController extends Controller
 
     //update
     public function update(Request $req){
+        $validation = $req->validate([
+            'title' => 'required',
+            'description'=>'required'
+        ]);
         $file = $req->file('image');
         if($file){
         $slider = Slider::find($req->id);

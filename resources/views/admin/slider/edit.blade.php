@@ -12,7 +12,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Description</label>
-                    <textarea class="form-control" name='description'  value='{{$slider->description}}' id="exampleInputPassword1" ></textarea>
+                    <input class="form-control" name='description'  value='{{$slider->description}}' id="exampleInputPassword1" >
                 </div>
                 <div class="form-group">
                     <label for="">Choose Slider Image</label>
