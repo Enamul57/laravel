@@ -27,7 +27,7 @@ class BrandController extends Controller
         
         $validation = $req->validate([
             'brand_name' => 'required|unique:brands|min:3',
-            'brand_image' => 'required|mimes:jpg,jpeg,png'
+            'brand_image' => 'required|mimes:jpeg,png,jpg,gif,svg'
         ]);
       
 
@@ -45,7 +45,12 @@ class BrandController extends Controller
             $brand->brand_image= $storingToDatabase;
             $brand->created_at = Carbon::now();
             $brand->save();
-            return back()->with('success','Image inserted successfully');
+            
+            $notification= ['alert-type' =>'success',
+            'message' => 'Brand inserted Successfully'];
+
+            return redirect()->route('show.brand')->with($notification);
+            
 
         
     }
@@ -89,13 +94,19 @@ class BrandController extends Controller
                 $brand->brand_image = $databasePath;
                 $brand->created_at = Carbon::now();
                 $brand->save();
-                return redirect()->route('show.brand')->with('success','Brand Updated Successfully');
+
+                $notification= ['alert-type' =>'info',
+                'message' => 'Brand Updated Successfully'];
+    
+                return redirect()->route('show.brand')->with($notification);
                 }else{
                     $brand = Brand::find($req->id);
                     $brand->brand_name = $req->brand_name;
                     $brand->created_at = Carbon::now();
                     $brand->save();
-                    return redirect()->route('show.brand')->with('success','Brand Updated Successfully');
+                    $notification= ['alert-type' =>'info',
+                    'message' => 'Brand Updated Successfully'];
+                        return redirect()->route('show.brand')->with($notification);
                     }
         
     }
@@ -108,6 +119,9 @@ class BrandController extends Controller
         if(file_exists($img)){
             unlink($img);
         }
-        return redirect()->back()->with('success','Brand Deletion Successfully');
+        $notification= ['alert-type' =>'warning',
+        'message' => 'Brand Deleted Successfully'];
+
+        return redirect()->back()->with($notification);
     }
 }

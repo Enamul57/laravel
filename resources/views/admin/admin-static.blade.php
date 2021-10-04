@@ -22,7 +22,8 @@
 
   <!-- SLEEK CSS -->
   <link id="sleek-css" rel="stylesheet" href="{{asset('assets/css/sleek.css')}}" />
-
+  <!-- toster css -->
+  <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css'/>
   
 
   <!-- FAVICON -->
@@ -140,26 +141,26 @@
                   <!-- User Account -->
                   <li class="dropdown user-menu">
                     <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                      <img src="{{asset('assets/img/user/user.png')}}" class="user-image" alt="User Image" />
-                      <span class="d-none d-lg-inline-block">Abdus Salam</span>
+                      <img src="{{asset('storage/'.Auth::user()->profile_photo_path)}}" class="user-image"  style='width:50px;height:50px'/>
+                      <span class="d-none d-lg-inline-block">{{Auth::user()->name}}</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <!-- User image -->
                       <li class="dropdown-header">
-                        <img src="{{asset('assets/img/user/user.png')}}" class="img-circle" alt="User Image" />
+                        <img src="{{asset('storage/'.Auth::user()->profile_photo_path)}}" class="img-circle"  style='width:50px;height:50px'/>
                         <div class="d-inline-block">
-                          Abdus Salam <small class="pt-1">abdus@gmail.com</small>
+                        {{Auth::user()->name}} <small class="pt-1">{{Auth::user()->email}}</small>
                         </div>
                       </li>
 
                       <li>
-                        <a href="profile.html">
+                        <a href="{{route('edit.profile')}}">
                           <i class="mdi mdi-account"></i> My Profile
                         </a>
                       </li>
                       <li>
-                        <a href="email-inbox.html">
-                          <i class="mdi mdi-email"></i> Message
+                        <a href="{{route('change.password')}}">
+                          <i class="mdi mdi-email"></i> Change Password
                         </a>
                       </li>
                       <li>
@@ -212,7 +213,7 @@
 
     
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCn8TFXGg17HAUcNpkwtxxyT9Io9B_NcM" defer></script>
-<script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/plugins/toaster/toastr.min.js')}}"></script>
 <script src="{{asset('assets/plugins/slimscrollbar/jquery.slimscroll.min.js')}}"></script>
@@ -231,9 +232,30 @@
 <script src="{{asset('assets/js/date-range.js')}}"></script>
 <script src="{{asset('assets/js/map.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
+<!-- Toaster js -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+  @if(Session::has('message'))
+    var type = "{{Session::get('alert-type','info')}}";
+    switch(type){
+      case 'info': 
+        toastr.info("{{Session::get('message')}}");
+        break;
+        case 'success': 
+        toastr.success("{{Session::get('message')}}");
+        break;
 
+        case 'warning': 
+        toastr.warning("{{Session::get('message')}}");
+        break;
 
+        case 'error': 
+        toastr.error("{{Session::get('message')}}");
+        break;
 
+    }
+  @endif
+</script>
 
   </body>
 </html>

@@ -39,8 +39,9 @@ class SliderController extends Controller
         Image::make($file)->resize(1920,1080)->save('image/slider/'.$namegen);
         $slider->image = 'image/slider/'.$namegen;
         $slider->save();
-
-        return redirect()->route('slider.show')->with('success','Slider Uploaded Successfully');
+        $notification= ['alert-type' =>'success',
+        'message' => 'Slider Uploaded Successfully'];
+        return redirect()->route('slider.show')->with($notification);
     }
 
     //edit
@@ -75,7 +76,9 @@ class SliderController extends Controller
         $slider->image = "image/slider/".$imageName;
         $slider->created_at = Carbon::now();
         $slider->save();
-        return redirect()->route('slider.show')->with('success','Slider Updated Successfully');
+        $notification= ['alert-type' =>'success',
+        'message' => 'Slider Updated Successfully'];
+        return redirect()->route('slider.show')->with($notification);
         }
         else{
             $slider = Slider::find($req->id);
@@ -83,12 +86,16 @@ class SliderController extends Controller
             $slider->description = $req->description;
             $slider->created_at = Carbon::now();
             $slider->save();
-         return redirect()->route('slider.show')->with('success','Slider Updated Successfully');
+            $notification= ['alert-type' =>'success',
+        'message' => 'Slider Updated Successfully'];
+         return redirect()->route('slider.show')->with($notification);
         }
     }
 
     public function delete($id){
         Slider::find($id)->delete();
-        return redirect()->route('slider.show')->with('success','Slider Deleeted Successfully');
+        $notification= ['alert-type' =>'warning',
+        'message' => 'Slider Deleeted Successfully'];
+        return redirect()->route('slider.show')->with($notification);
     }
 }

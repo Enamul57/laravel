@@ -41,7 +41,6 @@
   <!-- ======= Header ======= -->
     @include('body.header')
   <!-- ======= Hero Section ======= -->
-    @include('body.slider')
     @yield('main')
   <!-- ======= Footer ======= -->
     @include('body.footer')

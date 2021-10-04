@@ -36,7 +36,9 @@ class CategoryController extends Controller
         $category->user_id = Auth::user()->id;
         $category->category_name = $req->input('category_name');
         $category->save();
-        return redirect()->back()->with('success',"Category insertion successful");
+        $notification= ['alert-type' =>'success',
+        'message' => ' Profile Information changed Successfully'];
+        return redirect()->back()->with( $notification);
     }
 
     public function ShowCat(){
@@ -54,7 +56,9 @@ class CategoryController extends Controller
             'user_id'=> Auth::user()->id,
             'category_name'=>$req->category_name
         ]);
-        return redirect()->route('all.category')->with('success','Category Updated Successfully');
+        $notification= ['alert-type' =>'success',
+        'message' => ' Updated Successfully'];
+        return redirect()->route('all.category')->with( $notification);
     }
 
     public function Trash(){
@@ -65,16 +69,22 @@ class CategoryController extends Controller
 
     public function SoftDeletes($id){
         $softDeletes = Category::find($id)->delete();
-        return redirect()->route('trash.category')->with('success','Moved to trash Successful');
+        $notification= ['alert-type' =>'success',
+        'message' => ' Move to trash successfully'];
+        return redirect()->route('trash.category')->with( $notification);
     }
 
     public function Restore($id){
         $category = Category::withTrashed()->find($id)->restore();
-        return redirect()->route('all.category')->with('success','Category restored successfully');
+        $notification= ['alert-type' =>'success',
+        'message' => ' Restored Successfully'];
+        return redirect()->route('all.category')->with( $notification);
     }
 
     public function Delete($id){
         $category = Category::onlyTrashed()->find($id)->forceDelete();
-        return redirect()->route('all.category')->with('success','Category Deleted successfully');
+        $notification= ['alert-type' =>'Warning',
+        'message' => 'Category Deleted successfully'];
+        return redirect()->route('all.category')->with( $notification);
     }
 }

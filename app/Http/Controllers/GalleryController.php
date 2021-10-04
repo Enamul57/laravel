@@ -40,9 +40,11 @@ class GalleryController extends Controller
             $gallery->created_at = Carbon::now();
             $gallery->save();
         }
+        $notification= ['alert-type' =>'success',
+        'message' => 'Image Uploaded Successfully'];
         return redirect()->
             route('show.gallery')->
-                with('success','Image Uploaded Successfully');
+                with($notification);
     }
 
 }

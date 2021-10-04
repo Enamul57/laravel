@@ -1,10 +1,5 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-          Our Gallery 
-        </h2>
-
-    </x-slot>
+@extends('admin.admin-static')
+@section('admin')
     <div class="py-12">
         <div class="container">
         @if (session('success'))
@@ -42,11 +37,12 @@
                                     <label for="exampleInputEmail1">Multi Image</label>
                                     <input type="file" name="image[]" class="form-control" multiple="" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
-                    <button type="submit" class="btn btn-primary">Add Brand</button>
+                    <button type="submit" class="btn btn-primary">Add Portfolio</button>
                     </form>    
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+
+@endsection
